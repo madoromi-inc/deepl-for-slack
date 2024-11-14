@@ -18,14 +18,14 @@ const lanaguageOptions: PlainTextOption[] = orderedLangNames
     };
   });
 
-export async function openModal(client: WebClient, triggerId: string) {
+export async function openModal(client: WebClient, triggerId: string, text?: string) {
   await client.views.open({
     trigger_id: triggerId,
-    view: buildNewModal(orderedLangNames[0]),
+    view: buildNewModal(orderedLangNames[0], text),
   });
 }
 
-export function buildNewModal(lang: string): View {
+export function buildNewModal(lang: string, text?: string): View {
   return {
     type: "modal",
     callback_id: "run-translation",
@@ -49,6 +49,7 @@ export function buildNewModal(lang: string): View {
             type: "plain_text",
             text: "Put the text to translate",
           },
+          initial_value: text,
         },
         label: {
           type: "plain_text",

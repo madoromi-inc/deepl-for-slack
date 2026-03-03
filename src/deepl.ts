@@ -24,7 +24,6 @@ export class DeepLApi {
     return this.axiosInstance({
       url: "/translate",
       data: qs.stringify({
-        auth_key: this.authKey,
         text:
           // Before sending the text to the DeepL API,
           // replace special syntax parts with ignore tags to keep them
@@ -78,6 +77,7 @@ export class DeepLApi {
         ignore_tags: "emoji,mrkdwn,ignore",
       }),
       headers: {
+        Authorization: `DeepL-Auth-Key ${this.authKey}`,
         "content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
     })
